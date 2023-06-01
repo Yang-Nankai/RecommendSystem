@@ -58,7 +58,6 @@ from scipy.sparse import coo_matrix
 import math
 
 
-
 # 包含所有物品平均分的字典grouped_data
 def get_avg():
     '''
@@ -104,6 +103,8 @@ def get_user_like():
     for uid in range(0, user_count):
         user_like[uid] = {}
         index = 0
+        if uid % 1000 == 0:
+            print(uid)
         for iid in user_items[uid]:
             #找到物品属于的种类
             attr = attr_dataset.iloc[iid][1:].tolist()
@@ -135,9 +136,9 @@ def recom(user_like, user_id, item_sort):
                 print("该用户最喜欢种类", sorted_keys[0])
             #然后对其开始推荐
             print("为用户", uid, "进行推荐: ")
-
+            
             for i in range(topk):
-                print(item_sort[key][i])
+                print(item_sort[key][i][:2].values)
         else:
             print("无法推荐!")
 
